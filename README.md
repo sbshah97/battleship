@@ -19,9 +19,9 @@ This is primarily built as a recreational tool for students to learn the basics 
 
 ## Contributing
 - The repository is open to contribution from all interested developers. Kindly send us Pull Requests with explanation as to what changes you have done.
-- Also, you can write to us by opening an [Issue](https://github.com/salman-bhai/battleship/issues) and also solve a current issue if possible.
 - A detailed explanantion of how we came to building this software is maintained at the [Wiki](https://github.com/salman-bhai/battleship/wiki) page.
 - This repository was created and currently maintained by @[salman-bhai](https://github.com/salman-bhai).
+- refer to [CONTRIBUTING.md](https://github.com/arpit1997/battleship/blob/master/CONTRIBUTING.md) for more details
 
 
 ## License
