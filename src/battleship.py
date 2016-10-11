@@ -1,6 +1,6 @@
 # Welcome to the game of Battleship
 # @Author: Salman Shah
-
+from numpy.random import randint
 # Initializing the 'Ocean'
 ocean = []
 
