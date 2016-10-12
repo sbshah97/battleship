@@ -1,8 +1,9 @@
+import random
 # Welcome to the game of Battleship
 # @Author: Salman Shah
-from numpy.random import randint
+
 # Initializing the 'Ocean'
-ocean = []
+ocean = [["" for x in range(0,5)] for y in range(0,5)]  # declare a 2d matrix ocean
 
 # --- Game Starts here --- #
 def print_ocean(ocean):
@@ -16,12 +17,13 @@ print "Let the game of 5 x 5 Battleship begin"
 print_ocean(ocean)
 
 # Ask user to place the ship
-place_row = raw_input("Enter a valid row to place the Ship!")
-place_column = raw_input("Enter a valid column to place the Ship!")
-
+place_row = int(raw_input("Enter a valid row to place the Ship!"))
+place_column = int(raw_input("Enter a valid column to place the Ship!"))
+ocean[place_row][place_column] = "O" # To show where the ship is placed 
+board = 5 #initialize the size of the board 
 for turn in range(4):
-	guess_row = randint(0,len(board-1))
-	guess_column = randint(0,len(board-1))
+	guess_row = random.randint(0,(board-1)) #add word random
+	guess_column = random.randint(0,(board-1))
 
 	if guess_row == place_row and guess_column == place_column:
 		print "Congrats! You have won the Game!"
@@ -34,12 +36,10 @@ for turn in range(4):
 		ocean[guess_row][guess_column] = 'X'
 		print "Sorry man you missed it."
 
-	print "This was your" + turn+1 + "turn"
+	print "This was your" + str(turn+1) + "turn"
 	print_ocean(ocean)
 
 if turn >= 3:
 	print "Game over"
 	
 # --- Game ends here --- #
-
-
