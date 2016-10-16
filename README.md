@@ -7,7 +7,7 @@ Introductory game meant to learn the ways of the world of Python 2.7
 - Fork this project to your GitHub account.
 - After forking, enter the following commands in your terminal.
 ```
-$ git clone https://github.com/salman-bhai/solitaire
+$ git clone https://github.com/salman-bhai/battleship
 $ cd battleship/src
 $ python battleship.py
 ```
@@ -15,7 +15,7 @@ $ python battleship.py
 Next should be fairly simple to follow.
 
 ## Usage
-This is primarily built as a recreational tool for students to learn the basics of Python Programming.
+This is primarily built as a recreational tool for students / beginners to learn the basics of Python Programming.
 
 ## Contributing
 - The repository is open to contribution from all interested developers. Kindly send us Pull Requests with explanation as to what changes you have done.
