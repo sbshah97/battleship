@@ -3,7 +3,8 @@ import random
 # @Author: Salman Shah
 
 # Initializing the 'Ocean'
-ocean = [["-" for x in range(0,5)] for y in range(0,5)]  # declare a 2d matrix ocean
+ocean_size = 5
+ocean = [["_" for x in range(0,ocean_size)] for y in range(0,ocean_size)]  # declare a 2d matrix ocean
 
 # --- Game Starts here --- #
 def print_ocean(ocean):
@@ -12,9 +13,13 @@ def print_ocean(ocean):
 
 # Starting the game and printing the 'Ocean'
 
-print "Let the game of 5 x 5 Battleship begin"
+print "Let the game of " + str(ocean_size) + " x " + str(ocean_size) + " Battleship begin"
 #Function to print 'Ocean'
 print_ocean(ocean)
+
+# Making the game interactive
+computer_place_row = random.randint(0, (ocean_size-1))
+computer_place_col = random.randint(0, (ocean_size-1))
 
 # Ask user to place the ship
 flag = 0;
@@ -37,32 +42,34 @@ while (flag == 0):
 		else :	
 			ocean[place_row][place_column] = "O"
 			ocean[place_row+1][place_column] = "O"	
-			flag = 1	
+			flag = 1 # To show where the ship is placed
 
-print_ocean(ocean)
 board = 5 #initialize the size of the board 
 count = 2 # count of the no of ships 
-for turn in range(4):
-	guess_row = random.randint(0,(board-1)) #add word random
-	guess_column = random.randint(0,(board-1))
+turn = 0
 
+while turn <= 3:
+	guess_row = random.randint(0,(ocean_size-1))
+	guess_column = random.randint(0,(ocean_size-1))
+
+	print "Computer guessed: " + str(guess_row) + " " + str(guess_column)
 	if ocean[guess_row][guess_column] == "O":
 		count = count - 1
 		ocean[guess_row][guess_column] = "X"
-		if (count == 0):
-			print "Congrats! You have won the Game!"
-			break
-	elif ocean[guess_row][guess_column] == 'X':
-		print "You've been at that place before try again"
-		turn = turn -1
-	else:
-		ocean[guess_row][guess_column] = 'X'
-		print "Sorry man you missed it."
 
-	print "This was your" + str(turn+1) + "turn"
+	elif guess_row < 0 or guess_row > 4 and guess_column < 0 or guess_column > 4:
+		print "That wasn't even in the Board!"
+	elif ocean[guess_row][guess_column] == 'X':
+		print "You've been at that place before"
+	else:
+		turn += 1
+		ocean[guess_row][guess_column] = 'X'
+		print "Computer you missed it."
+	if count == 0:	
+		print "Sorry Computer detected your ship! You LOSE!!"
+		exit(0)	
+
+	print "This was computer's " + str(turn) + " chance."
 	print_ocean(ocean)
 
-if turn >= 3:
-	print "Game over"
-	
-# --- Game ends here --- #
+print "YAY!!! YOU WON...."
