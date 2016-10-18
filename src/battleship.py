@@ -34,7 +34,7 @@ while turn < 3:
 
 	print "Computer guessed: " + str(guess_row) + " " + str(guess_column)
 	if guess_row == user_place_row and guess_column == user_place_column:
-		print "Sorry Computer detected your ship! You LOOSE!!"
+		print "Sorry Computer detected your ship! You LOSE!!"
 		exit(0)
 	elif guess_row < 0 or guess_row > 4 and guess_column < 0 or guess_column > 4:
 		print "That wasn't even in the Board!"
