@@ -1,75 +1,134 @@
 import random
-# Welcome to the game of Battleship
-# @Author: Salman Shah
 
-# Initializing the 'Ocean'
-ocean_size = 5
-ocean = [["_" for x in range(0,ocean_size)] for y in range(0,ocean_size)]  # declare a 2d matrix ocean
 
-# --- Game Starts here --- #
-def print_ocean(ocean):
-	for row in ocean:
-		print " ".join(row)
+class Battleship:
+	ocean_size = 5
+	ocean_user = [["_" for x in range (0, ocean_size)] for y in range(0,ocean_size)]
+	ocean_cpu = [["_" for x in range (0, ocean_size)] for y in range(0,ocean_size)]
+	count_cpu = 2
+	count_user = 2
 
-# Starting the game and printing the 'Ocean'
+	def print_ocean():
+		for x in range (0, ocean_size): 
+			for y in range(0,ocean_size):
+				print " "
 
-print "Let the game of " + str(ocean_size) + " x " + str(ocean_size) + " Battleship begin"
-#Function to print 'Ocean'
-print_ocean(ocean)
+	def start():
+		print "Let the game of " + str(ocean_size) + "x" + str(ocean_size) + "begin"
+		print "User's Ocean"
+		print_ocean()
+		print "CPU's Ocean"
+		print_ocean()
 
-# Making the game interactive
-computer_place_row = random.randint(0, (ocean_size-1))
-computer_place_col = random.randint(0, (ocean_size-1))
-
-# Ask user to place the ship
-flag = 0;
-while (flag == 0):
-	place_row = int(raw_input("Enter a valid row to place the Ship of length 2!"))
-	place_column = int(raw_input("Enter a valid column to place the Ship of length 2!"))
-	print "1. HORIZONTAL"
-	print "2.VERTICAL"
-	choice = int(raw_input("Enter your choice"))
-	if (choice == 1):
-		if (place_column > 3):
-			continue
-		else :	
-			ocean[place_row][place_column] = "O"
-			ocean[place_row][place_column+1] = "O" # To show where the ship is placed 
+	def cpu_ships():
+		cpu_place_row = random.randint(0, (ocean_size-2))
+		cpu_place_col = random.randint(0, (ocean_size-2))
+		cpu_choice = random.randint(1,2)
+		if (cpu_choice == 1):
+			ocean_cpu[cpu_place_row][cpu_place_col] = "O"
+			ocean_cpu[cpu_place_row][cpu_place_col + 1] = "O"
 			flag = 1
-	elif (choice == 2):
-		if (place_row > 3):
-			continue
-		else :	
-			ocean[place_row][place_column] = "O"
-			ocean[place_row+1][place_column] = "O"	
-			flag = 1 # To show where the ship is placed
+		elif (choice == 2):
+			ocean_cpu[user_place_row][user_place_col] = "O"
+			ocean_cpu[user_place_row+1][user_place_col] = "O" 
 
-board = 5 #initialize the size of the board 
-count = 2 # count of the no of ships 
-turn = 0
+	def user_ships():
+		flag = 0
+		while (flag == 0):	
+			user_place_row = int(raw_input("Enter a number between 0-4\n->"))
+			user_place_col = int(raw_input("Enter a number between 0-4\n->"))
+			print "Enter the option number for the ship to be placed"
+			print "1. Horizontal"
+			print "2. Vertical"
+			user_choice = int(raw_input("Enter your choice\n->"))
+			if (user_choice == 1):
+				if (user_place_col > 3):
+					continue
+				else:
+					ocean_user[user_place_row][user_place_col] = "O"
+					ocean_user[user_place_row][user_place_col + 1] = "O"
+					flag = 1
+			elif (user_choice == 2):
+				if(user_place_row > 3):
+					continue
+				else:
+					ocean_user[user_place_row][user_place_col] = "O"
+					ocean_user[user_place_row+1][user_place_col] = "O" 
+					flag = 1
 
-while turn <= 3:
-	guess_row = random.randint(0,(ocean_size-1))
-	guess_column = random.randint(0,(ocean_size-1))
+	def cpu_turn():
+		flag = 0
+		while (flag == 0):
+			cpu_move_row = random.randint(0, ocean_size-1)
+			cpu_move_col = random.randint(0, ocean_size-1)
 
-	print "Computer guessed: " + str(guess_row) + " " + str(guess_column)
-	if ocean[guess_row][guess_column] == "O":
-		count = count - 1
-		ocean[guess_row][guess_column] = "X"
+			if(ocean_user[cpu_move_row][cpu_move_col] == "O"):
+				print "That was a hit"
+				count_user = count_user - 1
+				flag = 1
+			elif(ocean_user[cpu_move_row][cpu_move_col] == "X"):
+				print "You've already hit there"
+			else:
+				print "Hard luck! No ship there!"
+				flag = 1
+		ocean_user[cpu_move_row][cpu_move_col] = "X"
 
-	elif guess_row < 0 or guess_row > 4 and guess_column < 0 or guess_column > 4:
-		print "That wasn't even in the Board!"
-	elif ocean[guess_row][guess_column] == 'X':
-		print "You've been at that place before"
-	else:
-		turn += 1
-		ocean[guess_row][guess_column] = 'X'
-		print "Computer you missed it."
-	if count == 0:	
-		print "Sorry Computer detected your ship! You LOSE!!"
-		exit(0)	
+	def user_turn():
+		flag = 0
+		while (flag == 0):	
+			user_move_row = int(raw_input("Enter a number between 0 and 4\n->"))
+			user_move_col = int(raw_input("Enter a number between 0 and 4\n->"))
 
-	print "This was computer's " + str(turn) + " chance."
-	print_ocean(ocean)
+			if(ocean_cpu[user_move_row][user_move_col] == "O"):
+				print "That was a hit."
+				count_cpu = count_cpu - 1
+				flag = 1
+			elif(ocean_cpu[user_move_row][user_move_col] == "X"):
+				print "You've already hit there"
+			elif(user_move_row > ocean_size-1 or user_move_col > ocean_size-1):
+				print "Invalid move. Can't hit there!"
+			else:
+				print "Hard luck! No ship there!"
+				flag = 1
+		ocean_cpu[user_move_row][user_move_col] = "X"
 
-print "YAY!!! YOU WON...."
+	def user_win():
+		if(count_cpu == 0):
+			print "User wins. Yayyyyy!"
+			exit(0)
+
+	def cpu_win():
+		if(count_user == 0):
+			print "CPU wins. Yayyyyyy!"
+			exit(0)
+
+def main():
+	game = Battleship() 
+	game.start()
+	gaem.cpu_ships()
+	game.user_ships()
+	while true:
+		game.user_turn()
+		game.user_win()
+		game.cpu_turn()
+		game.cpu_win()
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
