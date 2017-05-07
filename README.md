@@ -27,7 +27,3 @@ This is primarily built as a recreational tool for students / beginners to learn
 ## License
 
 - The software is registered under the [MIT License](https://github.com/salman-bhai/battleship/blob/master/LICENSE)
-
-
-
-
