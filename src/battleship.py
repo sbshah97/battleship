@@ -31,7 +31,7 @@ def print_board():
     numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     #print numbers.join("")
     for row in range(SIZE):
-        print " ".join(player_radar[row]), "||" , " ".join(player_board[row])
+        print(" ".join(player_radar[row]), "||" , " ".join(player_board[row]))
 def random_row(is_vertical, size):
     if is_vertical:
         return randint(0, SIZE - size)
@@ -116,7 +116,7 @@ for x in range(len(SHIPS)):
     player_board = make_ship(SHIPS[x], player_board, x)
     ai_board = make_ship(SHIPS[x], ai_board)
 
-print "Let's play Battleship!"
+print("Let's play Battleship!")
 print_board()
 while player_alive and ai_alive:
     # player turn
@@ -137,10 +137,10 @@ while player_alive and ai_alive:
             print ("Congratulations! You sunk my battleship!")
             break
     else:
-        print ("Admiral, we've missed the enemy battleship!")
+        print("Admiral, we've missed the enemy battleship!")
         player_radar[guess_row][guess_col] = FIRE
     # AI turn
-    print "target orientation: ", orientation
+    print("target orientation: ", orientation)
     if not len(ship_length): # No current targets
         #print "No Current Targets"
         second_shot = 0
@@ -172,7 +172,7 @@ while player_alive and ai_alive:
         #print "Last shot was a miss: ", miss
         if orientation == -1: # shot-test for orientation of hit ship
             #ship_position[ swapped for ai_hit_
-            print "Ship has no orientation"
+            print("Ship has no orientation")
             if is_ocean(ship_position[0]+1, ship_position[1], ai_radar):
                 ai_guess_row = ship_position[0]+1
                 ai_guess_col = ship_position[1]
@@ -188,7 +188,7 @@ while player_alive and ai_alive:
         elif orientation: # Shoot at verticle ship
             #print "Previous Guess: ", ai_guess_row, ":", ai_guess_col
             for item in ai_radar:
-                print item[0], ' '.join(map(str, item[1:]))
+                print(item[0], ' '.join(map(str, item[1:])))
             if is_ocean(ai_guess_row+1, ai_guess_col, ai_radar) and not miss:
                 ai_guess_row += 1
             else:
@@ -201,7 +201,7 @@ while player_alive and ai_alive:
         else: # Shoot at horizontal ship
             #print "Previous Guess: ", ai_guess_row, ":", ai_guess_col
             for item in ai_radar:
-                print item[0], ' '.join(map(str, item[1:]))
+                print(item[0], ' '.join(map(str, item[1:])))
             if is_ocean(ai_guess_row, ai_guess_col-1, ai_radar) and not miss:
                 ai_guess_col = ai_guess_col-1
             else:
@@ -228,7 +228,7 @@ while player_alive and ai_alive:
                     orientation = 0
                 else:
                     orientation = 1
-                print "New Orientation: ", orientation
+                print("New Orientation: ", orientation)
             elif total_hits[0] != number_board[ai_guess_row][ai_guess_col]: # Other ship was shot
                 ship_length.append((ship_number(ai_guess_row, ai_guess_col)))
                 ship_position.extend([ai_guess_row, ai_guess_col])
@@ -240,7 +240,7 @@ while player_alive and ai_alive:
                 print_board()
                 break
         else: # AI missed
-            print "DEBUG: r,c: ", ai_guess_row, ", ", ai_guess_col
+            print("DEBUG: r,c: ", ai_guess_row, ", ", ai_guess_col)
             miss = 1
             player_board[ai_guess_row][ai_guess_col] = FIRE
             ai_radar[ai_guess_row][ai_guess_col] = FIRE
